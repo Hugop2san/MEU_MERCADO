@@ -1,14 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Criar Lista de Compra</title>
-</head>
-<body>
-    <h1>Criar Lista de Compra</h1>
+
+<!-- templates/contatos/adicionar_contatos.html -->
+{% extends "base.html" %}
+{% block title %}Criar Lista de Compra{% endblock %}
+
+{% block content %}
+<h1>Criar Lista de Compra</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Salvar</button>
+        
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                <div class="alert alert-danger">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-dark">Adicionar</button>
     </form>
-</body>
-</html>
+    <a href="{% url 'dashboard' %}" class="btn btn-link">Voltar a Dashboard</a>
+
+    <!--
+    <ul>
+        {% for contato in contatos %}
+            <li>{{ contato.nome }} - {{ contato.email }} - {{ contato.telefone }} - {{ contato.endereco }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'login' %}" class="btn btn-link">Voltar a Login</a> -->
+
+{% endblock %}

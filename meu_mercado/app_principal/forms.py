@@ -53,7 +53,8 @@ class LoginForm(BootstrapModelForm):
       
 class ListaDeCompraForm(forms.ModelForm):
     data = forms.DateField(widget=SelectDateWidget())
-
+    produto = forms.ModelChoiceField(queryset=Produto.objects.all(), empty_label="---------")
+    
     class Meta:
         model = ListaDeCompra
         fields = ['produto', 'data', 'quantidade', 'preco']
@@ -69,4 +70,10 @@ class ListaDeCompraForm(forms.ModelForm):
         if quantidade <= 0:
             raise forms.ValidationError("A quantidade deve ser um valor positivo.")
         return quantidade
+    
+    
+class ProdutoForm(forms.ModelForm):
+    class Meta:
+        model = Produto
+        fields = ['nome', 'descricao']
 
