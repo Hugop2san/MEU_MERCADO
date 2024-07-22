@@ -1,1 +1,5 @@
-# MEU_MERCADO
+![image](https://github.com/user-attachments/assets/b8ece828-929d-45cb-a5d0-24ddfa69ae7d)
+![image](https://github.com/user-attachments/assets/d135386b-17d8-4be6-9343-fb1a25fd8500)
+![image](https://github.com/user-attachments/assets/5b7ea620-d34f-4b0b-a270-ff25a4220b23)
+![image](https://github.com/user-attachments/assets/1a5f9a20-5733-486f-be79-82134dd0ad22)
+![image](https://github.com/user-attachments/assets/110f50d2-6c5b-4209-8ee0-3038921b43e0)
