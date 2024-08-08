@@ -14,6 +14,8 @@ Tecnologias Utilizadas
 Objetivo
 O objetivo deste projeto é fornecer uma solução simples e eficiente para o gerenciamento de listas de compras, permitindo que cada usuário tenha controle total sobre seus produtos e listas de compras de maneira segura e intuitiva.
 
+
+Telas Registro e Login:
 ![image](https://github.com/user-attachments/assets/65b9a0cd-ab2d-44c0-9f91-5b076d585b27)
 ![image](https://github.com/user-attachments/assets/f07e9e79-990a-4570-9b74-c7c06381fab4)
 
