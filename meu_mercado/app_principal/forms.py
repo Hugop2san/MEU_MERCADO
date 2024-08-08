@@ -57,13 +57,13 @@ class ListaDeCompraForm(forms.ModelForm):
     
     class Meta:
         model = ListaDeCompra
-        fields = ['produto', 'data', 'quantidade', 'preco']
+        fields = ['produto', 'data', 'quantidade', 'preco_unitario']
 
     def clean_preco(self):
-        preco = self.cleaned_data.get('preco')
-        if preco <= 0:
+        preco_unitario = self.cleaned_data.get('preco_unitario')
+        if preco_unitario <= 0:
             raise forms.ValidationError("O preço deve ser um valor positivo.")
-        return preco
+        return preco_unitario
 
     def clean_quantidade(self):
         quantidade = self.cleaned_data.get('quantidade')

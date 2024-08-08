@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password, check_password
 from django.db.models import Count
 from django.db import models
+from django.contrib.auth.models import User
 
 class Usuario(models.Model):
     nome = models.CharField(max_length=100)
@@ -54,9 +55,10 @@ class Produto(models.Model):
 class ListaDeCompra(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    produto_nome = models.CharField(max_length=100, default='Produto desconhecido')  # Campo para armazenar o nome do produto
     data = models.DateField()
     quantidade = models.PositiveIntegerField()
-    preco = models.DecimalField(max_digits=10, decimal_places=2)
+    preco_unitario = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         verbose_name_plural = 'listas_de_compra'
@@ -66,3 +68,4 @@ class ListaDeCompra(models.Model):
     
     def __str__(self):
         return f"{self.usuario.nome} - {self.produto.nome} - {self.data}"
+    

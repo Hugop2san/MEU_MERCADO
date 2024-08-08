@@ -57,24 +57,38 @@ def registro(request):
 def dashboard(request):
     usuario_id= request.session.get('usuario_id')
     if usuario_id :
-        usuario= Usuario.objects.get(id = usuario_id)
-        #lista_produtos = Produto.objects.filter(usuario = usuario)
-        return render(request, 'listadecompra/dashboard.html', { 'usuario': usuario })
+        try:
+            usuario= Usuario.objects.get(id = usuario_id)            
+            produtoslistadecompra = ListaDeCompra.objects.filter(usuario = usuario)
+            return render(request, 'listadecompra/dashboard.html', { 'usuario': usuario, 'produtoslistadecompra': produtoslistadecompra })
+        except:
+            return redirect('login')        
     else: 
         return redirect('login')
     
     
 def criar_lista_de_compra(request):
-    if request.method == 'POST':
-        form = ListaDeCompraForm(request.POST)
-        if form.is_valid():
-            lista_de_compra = form.save(commit=False)
-            lista_de_compra.usuario = request.user
-            lista_de_compra.save()
-            return redirect('criar_lista_de_compra')  # Redireciona para a pagina de criar lista e continuar adicionando.
-    else:
-        form = ListaDeCompraForm()
-    return render(request, 'listadecompra/criar_lista_de_compra.html', {'form': form})
+        usuario_id= request.session.get('usuario_id')
+        if usuario_id:
+            if request.method == 'POST':
+                form = ListaDeCompraForm(request.POST)
+                if form.is_valid():
+                    lista_de_compra = form.save(commit=False)
+                    #try
+                    lista_de_compra.usuario = Usuario.objects.get(id=usuario_id)
+                    produto_id = form.cleaned_data['produto'].id
+                    produto = Produto.objects.get(id=produto_id)
+                    lista_de_compra.produto = produto
+                    lista_de_compra.produto_nome = produto.nome  # Salva o nome do produto
+                    lista_de_compra.save()
+                    return redirect('criar_lista_de_compra')  # Redireciona para a pagina de criar lista e continuar adicionando.
+                    #except
+            else:
+                form = ListaDeCompraForm()
+            return render(request, 'listadecompra/criar_lista_de_compra.html', {'form': form})
+        else:
+            redirect('login')
+    
     
 def cadastrar_produto(request):
     if request.method == 'POST':
@@ -89,10 +103,13 @@ def cadastrar_produto(request):
 
 def listar_usuarios(request):
     usuario_id = request.session.get('usuario_id')
+    
     if usuario_id:
         usuario = Usuario.objects.get(id = usuario_id)
+        
         if usuario.is_admin:
             usuarios = Usuario.objects.filter(is_admin=False)
+            
             return render(request, 'usuarios/listar_usuarios.html', {'usuarios': usuarios})
         else:
             messages.error(request, 'Você nao tem permissao para acessar essa pagina.')
@@ -101,7 +118,26 @@ def listar_usuarios(request):
     else: 
         return redirect('login')
 
-
+def excluir_usuario(request, usuario_id):
+    
+    usuario_logado_id = request.session.get('usuario_id')
+    usuario_logado= Usuario.objects.get(id = usuario_logado_id)
+    
+    if usuario_logado:
+        usuario_a_ser_excluido = get_object_or_404(Usuario, id=usuario_id)
+        
+        if usuario_logado.is_admin:
+            usuario_a_ser_excluido.delete()
+            messages.success(request, f'usuario {usuario_a_ser_excluido.nome} excluido com sucesso.')
+        else:
+            messages.error(request, 'Voce nao tem permissao para ecluir usuarios.')
+        return redirect('listar_usuarios')
+            
+    else: 
+        return redirect('login')
+    
+    
+   
 
 
 def logout(request):

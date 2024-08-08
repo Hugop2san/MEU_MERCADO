@@ -19,9 +19,14 @@
             {% endif %}
         </div>
         {% endfor %}
-        <button type="submit" class="btn btn-dark">Adicionar</button>
+        <br>
+        <div>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
+        <a href="{% url 'cadastrar_produto' %}" class="btn btn-secondary">Cadastrar Produto</a>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Voltar a Dashboard</a>
+        </div>
     </form>
-    <a href="{% url 'dashboard' %}" class="btn btn-link">Voltar a Dashboard</a>
+    
 
     <!--
     <ul>

@@ -116,7 +116,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# garantindo uploads de imagens com o uso do "{% static ' '%}" do bootstrap
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+#Email definitions
+#Senha app   = projeto-django (pviz czzg yuch ueuq)
+EMAIL_HOST= '#'
+EMAIL_PORT= '#'
+EMAIL_HOST_USER= 'hugopereira2santos61@gmail.com'
+EMAIL_HOST_PASSWORD= '#'
+EMAIL_USE_TLS= True
+DEFAULT_FROM_EMAIL= 'firwearsporting.comercial@gmail.com'
+EMAIL_BACKEND= 'django.core.mailbackends.smtp.EmailBackend'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

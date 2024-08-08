@@ -17,7 +17,9 @@
         {% endif %}
     </div>
     {% endfor %}
-    <button type="submit" class="btn btn-dark">Cadastrar Produto</button>
+    <button type="submit" class="btn btn-dark">Salvar Cadastro</button>
+    <a href="{% url 'criar_lista_de_compra' %}" class="btn btn-link">Voltar a Comprar</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-link">Voltar ao Dashboard</a>
 </form>
-<a href="{% url 'criar_lista_de_compra' %}" class="btn btn-link">Voltar a Comprar</a>
+
 {% endblock %}
